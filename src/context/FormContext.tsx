@@ -2,9 +2,9 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface FormData {
-    name: string;
-    email: string;
+    nome: string;
     sobrenome: string;
+    email: string;
 }
 
 interface FormContextType {
@@ -15,7 +15,7 @@ interface FormContextType {
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 export const FormProvider = ({ children }: { children: ReactNode }) => {
-    const [data, setData] = useState<FormData>({ name: "", email: "", sobrenome: "" });
+    const [data, setData] = useState<FormData>({ nome: "", email: "", sobrenome: "" });
 
     return (
         <FormContext.Provider value={{ data, setData }}>
@@ -27,7 +27,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 export const useFormContext = () => {
     const context = useContext(FormContext);
     if (!context) {
-        throw new Error("useFormContext must be used within a FormProvider");
+        throw new Error("useFormContext deve ser usado dentro de um FormProvider");
     }
     return context;
 };
